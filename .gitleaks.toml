@@ -1,0 +1,49 @@
+# GitLeaks configuration file
+title = "GitLeaks config for Golduck project"
+
+[extend]
+# Extend default configuration
+useDefault = true
+
+# Custom rules for additional secret patterns
+[[rules]]
+description = "Environment variables that might contain secrets"
+id = "env-secrets"
+regex = '''(?i)(api_key|secret_key|private_key|password|token|credential|auth)[\s]*=[\s]*["']?[^\s"'\n]{8,}["']?'''
+path = '''\.(env|config|ini|yaml|yml|json)$'''
+
+
+[[rules]]
+description = "Generic API Keys in code"
+id = "generic-api-key"
+regex = '''(?i)['"]?[a-z0-9_-]*api[_-]?key['"]?\s*[:=]\s*['"][a-z0-9_-]{20,}['"]'''
+
+# Allowlist for common false positives
+[allowlist]
+description = "Allowlisted files and paths"
+files = [
+    '''\.git/''',
+    '''node_modules/''',
+    '''\.pytest_cache/''',
+    '''__pycache__/''',
+    '''\.ruff_cache/''',
+    '''\.venv/''',
+]
+
+commits = [
+    # Add commit hashes of known safe commits here if needed
+]
+
+paths = [
+    # Example patterns for test files that might contain fake secrets
+    '''tests/.*test.*\.py$''',
+    '''.*example.*\.py$''',
+]
+
+regexes = [
+    # Common false positives
+    '''password.*=.*\{\{.*\}\}''',  # Template variables
+    '''token.*=.*\$\{.*\}''',       # Environment variable references
+    '''key.*=.*example''',          # Example values
+    '''secret.*=.*dummy''',         # Dummy values
+]

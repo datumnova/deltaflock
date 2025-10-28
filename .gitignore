@@ -1,0 +1,41 @@
+# Environment and secret files
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+*.pfx
+secrets.yaml
+secrets.yml
+secrets.json
+*.secret
+
+# Python artifacts
+*__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+.venv/
+**.cache/
+query_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Security and analysis reports
+bandit-report.json
+security-report.html
+.secrets.baseline
+.gitleaks-report.json
+.trufflehog-report.json
+
+# IDE and system files
+.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Project specific
+.github/copilot-instructions.md
+duckdb_init.sql

@@ -1,0 +1,45 @@
+# Pre-commit hooks configuration for secret scanning
+repos:
+  # Basic file checks and secret detection
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: detect-private-key
+        name: Detect Private Keys
+        description: Detects presence of private keys
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      - id: check-merge-conflict
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  # Enhanced secret detection with multiple approaches
+  - repo: local
+    hooks:
+      - id: git-secrets
+        name: Git Secrets Scanner
+        description: Scan for secrets using git-secrets
+        entry: git secrets --scan
+        language: system
+        files: '.*'
+        stages: [pre-commit]
+      - id: secret-patterns
+        name: Custom Secret Pattern Scanner
+        description: Scan for common secret patterns
+        entry: bash -c 'grep -E "(AZURE_CLIENT_SECRET|AZURE_CLIENT_ID|AZURE_TENANT_ID|api[_-]?key|password|token).*=.*[\"'\''][A-Za-z0-9+/~._-]{20,}[\"'\'']" "$@" && exit 1 || exit 0' --
+        language: system
+        files: '\.(py|js|ts|yaml|yml|json|env)$'
+        stages: [pre-commit]
+
+# Configuration for specific tools
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit hooks
+
+    for more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: ''
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false
