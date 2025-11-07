@@ -123,17 +123,53 @@ sequenceDiagram
 - `src/app/config/settings.py` — pydantic-based settings (.env support).
 - `src/app/telemetry/tracing.py` — tracing utilities and decorators used across the codebase.
 
-## How to run (developer commands)
+## How to run
 
+### Option 1: Docker Compose (Recommended)
 
-### Run Redis + Jaeger via Docker Compose
+The easiest way to run deltaflock with all dependencies is using Docker Compose:
 
-For local development you can start a sidecar Redis and Jaeger using Docker Compose. This repo includes a `docker-compose.yml` that launches Redis (for caching) and Jaeger (for traces):
+1. Copy the environment template and configure your values:
+```bash
+cp .env.example .env
+# Edit .env with your Unity Catalog credentials and other settings
+```
 
+2. Build and start all services:
 ```bash
 docker compose up -d
 ```
-### Run server (development):
+
+This will start:
+- **deltaflock** API at `http://localhost:9000`
+- **Redis** for caching at `localhost:6379`  
+- **Jaeger** UI for tracing at `http://localhost:16686`
+
+3. Test the API:
+```bash
+curl http://localhost:9000/health
+curl "http://localhost:9000/api/v1/query?query=SELECT 1 as test"
+```
+
+4. View logs:
+```bash
+docker compose logs -f deltaflock
+```
+
+5. Stop services:
+```bash
+docker compose down
+```
+
+### Option 2: Local Development
+
+For development you can run deltaflock locally while using Docker for dependencies:
+
+1. Start Redis and Jaeger:
+```bash
+docker compose up redis jaeger -d
+```
+2. Run deltaflock locally:
 
 ```bash
 az login  # if using Azure authentication in duckdb_init.sql
