@@ -6,7 +6,6 @@ This README documents the current architecture, data flow, developer workflows, 
 
 ## High-level architecture
 
-### Architecture overview
 ### Architecture (component flow)
 
 ```mermaid
@@ -48,9 +47,9 @@ flowchart LR
 - Initialization/Extensions: `DuckDBSession` reads initialization SQL from a configurable source and substitutes environment placeholders (e.g. `${UC_CATALOG_TOKEN}`) before executing statements. By default, it uses the bundled `src/app/db/duckdb_init.sql` file, but you can provide a custom initialization file via the `duckdb_init_sql_file` environment variable. When SQL execution fails, a small fallback sequence installs/loads the `uc_catalog` and `delta` extensions. See [Database Initialization Configuration](docs/database-initialization.md) for detailed setup instructions.
 - Telemetry: Tracing and lightweight logging helpers live in `src/app/telemetry/tracing.py`. The project uses OpenTelemetry with an OTLP exporter when available, otherwise it falls back to the console exporter. Helper mixins and decorators (e.g. `TracingMixin`, `@trace_async_function`) are used across services.
 
-## Request / data flow (detailed)
+### Request / data flow (detailed)
 
-### Data flow diagram
+#### Data flow diagram
 
 ```mermaid
 sequenceDiagram
@@ -88,7 +87,7 @@ sequenceDiagram
    Note over QS,QC: Tracing spans created across steps (TracingMixin, decorators)
 ```
 
-### Step-by-step request flow
+#### Step-by-step request flow
 
 1. Incoming HTTP request reaches FastAPI (`src/app/main.py`).
 2. `SessionMiddleware` runs for each request:
@@ -137,6 +136,7 @@ docker compose up -d
 ### Run server (development):
 
 ```bash
+az login  # if using Azure authentication in duckdb_init.sql
 uv sync
 uv build
 uv run golduck

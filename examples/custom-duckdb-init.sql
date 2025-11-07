@@ -9,6 +9,12 @@ INSTALL delta;
 LOAD delta;
 LOAD uc_catalog;
 
+-- INSTALL azure;
+-- INSTALL delta;
+-- LOAD delta;
+-- LOAD azure;
+-- set azure_transport_option_type = 'curl';
+
 -- Create Unity Catalog secret for your environment
 -- Customize the endpoint and use environment variable substitution
 CREATE SECRET (

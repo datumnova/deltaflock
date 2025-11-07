@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Golduck - DuckDB Delta API",
-    icon="",
+    icon="🦆",
     description="A high-performance API for querying DuckDB with Delta Lake support and comprehensive OpenTelemetry tracing",
     version="1.0.0",
 )
