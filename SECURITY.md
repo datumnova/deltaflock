@@ -1,6 +1,6 @@
 # Security and Secret Management
 
-This document outlines the security practices and secret scanning setup for the Golduck project.
+This document outlines the security practices and secret scanning setup for the deltaflock project.
 
 ## Pre-commit Hooks for Secret Scanning
 

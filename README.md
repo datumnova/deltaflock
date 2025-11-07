@@ -139,9 +139,9 @@ docker compose up -d
 az login  # if using Azure authentication in duckdb_init.sql
 uv sync
 uv build
-uv run golduck
+uv run deltaflock
 ```
-This starts the FastAPI server at `http://localhost:9000` using the `golduck` console script entry point defined in `pyproject.toml`. The server displays colorful ASCII art on startup and includes comprehensive OpenTelemetry tracing.
+This starts the FastAPI server at `http://localhost:9000` using the `deltaflock` console script entry point defined in `pyproject.toml`. The server displays colorful ASCII art on startup and includes comprehensive OpenTelemetry tracing.
 ![alt text](src/app/static/image.png)
 
 Redis will be available at `redis://localhost:6379/0` and Jaeger UI at http://localhost:16686.

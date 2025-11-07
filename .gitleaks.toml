@@ -1,5 +1,5 @@
 # GitLeaks configuration file
-title = "GitLeaks config for Golduck project"
+title = "GitLeaks config for deltaflock project"
 
 [extend]
 # Extend default configuration

@@ -1,5 +1,5 @@
 [project]
-name = "golduck"
+name = "deltaflock"
 version = "0.1.0"
 description = "A Python API for querying Delta tables using DuckDB with OpenTelemetry monitoring."
 authors = [
@@ -28,7 +28,7 @@ dependencies = [
 ]
 
 [project.scripts]
-golduck = "src.app:main"
+deltaflock = "src.app:main"
 
 [build-system]
 requires = ["hatchling"]

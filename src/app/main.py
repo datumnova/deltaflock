@@ -19,7 +19,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
-    title="Golduck - DuckDB Delta API",
+    title="Deltaflock - DuckDB Delta API",
     icon="🦆",
     description="A high-performance API for querying DuckDB with Delta Lake support and comprehensive OpenTelemetry tracing",
     version="1.0.0",
@@ -189,7 +189,7 @@ def main() -> int:
             except Exception as e:
                 logger.warning(f"Failed to run renderer script: {e}")
 
-    logger.info("Golduck engaged — ready to quack queries!")
+    logger.info("Deltaflock engaged — ready to quack queries!")
     logger.info("Starting DuckDB Delta API server via main()...")
     # Print colored art (or fallback)
     _print_colored_art()

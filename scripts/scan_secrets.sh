@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Secret scanning utility script for Golduck project
+# Secret scanning utility script for deltaflock project
 # This script provides various secret scanning options
 
 set -e
@@ -17,7 +17,7 @@ NC='\033[0m' # No Color
 
 print_header() {
     echo -e "${BLUE}========================================${NC}"
-    echo -e "${BLUE} Golduck Secret Scanner${NC}"
+    echo -e "${BLUE} deltaflock Secret Scanner${NC}"
     echo -e "${BLUE}========================================${NC}"
 }
 
